@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>cdom example</title>
+</head>
+<body>
+    <canvas></canvas>
+    <script src="dist/cdom.js"></script>
+    <script>
+        const canvas = document.querySelector('canvas')
+        const cdom = new CDOM(canvas)
+        cdom.resizeCanvas(600, 600)
+        const circle = cdom.createFigure('circle')
+        circle.stroke({x: 0, y: 0}, { x: 200, y: 200}, 200)
+    </script>
+</body>
+</html>
