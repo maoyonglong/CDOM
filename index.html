@@ -5,6 +5,12 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>cdom example</title>
+    <style>
+        canvas {
+            margin: 50px;
+            background-color: cyan;
+        }
+    </style>
 </head>
 <body>
     <canvas></canvas>
@@ -13,8 +19,47 @@
         const canvas = document.querySelector('canvas')
         const cdom = new CDOM(canvas)
         cdom.resizeCanvas(600, 600)
-        const circle = cdom.createFigure('circle')
-        circle.stroke({x: 0, y: 0}, { x: 200, y: 200}, 200)
+        const rect = cdom.createFigure('rectangle', {
+            origin: {
+                x: 50,
+                y: 50
+            },
+            width: 100,
+            height: 100,
+            stroke: {
+                color: '#aaa',
+                line: {
+                    width: 20,
+                    dash: {
+                        type: [2, 10]
+                    }
+                }
+            },
+            fill: {
+                color: 'yellow'
+            }
+        }).draw()
+        const circle = cdom.createFigure('circle', {
+            origin: {
+                x: 200,
+                y: 200
+            },
+            radius: 200,
+            stroke: {
+                color: 'red',
+                line: {
+                    dash: {
+                        type: [20, 20]
+                    }
+                }
+            },
+            update: function () {
+                console.log(1)
+            }
+        }).draw()
+        rect.on('mousedown', function (e) {
+            rect.clear()
+        })
     </script>
 </body>
 </html>

@@ -1,35 +1,19 @@
 import { Geometry } from './base'
 
 class Circle extends Geometry {
-  draw (origin, center, radius, type) {
+  draw () {
     const ctx = this.context
-    ctx.beginPath()
-    ctx.arc(origin.x + center.x, origin.y + center.y, radius, 0, 2 * Math.PI)
-    if (type === 'stroke') {
-      ctx.stroke()
-    } else if (type === 'fill') {
-      ctx.fill()
-    } else {
-      throw new Error('[error] You should offer the type paramter')
-    }
+    return super.draw(function () {
+      const { origin, radius } = this.options
+      ctx.arc(origin.x, origin.y, radius, 0, 2 * Math.PI)
+    })
   }
-  applyStyle () {
-    if (this.options) {
-      if (this.options.stroke) {
-
-      }
-      if (this.options.fill) {
-
-      }
-    }
-  }
-  stroke (...args) {
-    args.push('stroke')
-    this.draw.apply(this, args)
-  }
-  fill (...args) {
-    args.push('fill')
-    this.draw.apply(this, args)
+  setRange () {
+    const { origin, radius } = this.options
+    this.rectRange = [{
+      x: origin.x - radius,
+      y: origin.y - radius
+    }, 2 * radius, 2 * radius]
   }
 }
 
